@@ -8,15 +8,18 @@ import Link from "next/link";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";  
 import { toast } from "sonner";
 import { loginSchema } from "./LoginValidation";
-import { loginUser } from "@/services/AuthServices";
+import { getCurrentUser, loginUser } from "@/services/AuthServices";
 import { useRouter, useSearchParams } from "next/navigation";
+import { useUser } from "@/context/UserContext";
+
+
 
 const LoginForm = () => {
 
   const searchParams = useSearchParams()
   const redirect = searchParams.get("redirectPath")
   const router = useRouter()
-
+ const  {setUser} = useUser()
     const form = useForm({
         resolver: zodResolver(loginSchema)
       });
@@ -30,6 +33,8 @@ const LoginForm = () => {
           console.log(res);
           if(res.status){
             toast.success(res?.message)
+            const user =await getCurrentUser()
+            setUser(user)
             if(redirect){
               router.push(redirect)
             }else{

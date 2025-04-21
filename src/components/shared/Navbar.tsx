@@ -4,13 +4,12 @@ import Link from "next/link";
 import {  useState } from "react";
 import { Button } from "../ui/button";
 import { Sheet, SheetContent, SheetTitle, SheetTrigger } from "../ui/sheet";
-import { Menu } from "lucide-react";
+import { LogOut, Menu } from "lucide-react";
 import ProfileIcon from "./ProfileIcon";
 import { useUser } from "@/context/UserContext";
 import { logout } from "@/services/AuthServices";
 import { usePathname, useRouter } from "next/navigation";
 import { protectedRoutes } from "@/constant";
-
 
 
 const Navbar = () => {
@@ -24,9 +23,8 @@ const Navbar = () => {
 const handlelogout = () =>{
     logout()
     setIsLoading(true)
-    if(protectedRoutes.some(route => pathname.match(route))){
-        router.push('/')
-       
+    if(protectedRoutes.some(route => route.test(pathname))){
+        router.push("/")
     }
 }
 
@@ -44,11 +42,12 @@ const handlelogout = () =>{
             <nav className="hidden md:flex gap-6 items-center" >
                  <Link href="/" className="hover:text-primary transition ease-in-out">Home</Link>
                  <Link href="/find-meals" className="hover:text-primary transition ease-in-out">Find Meals</Link>
-                 {
-                    user ? <Link href="/dashboard/customer" className="hover:text-primary transition  ease-in-out">Dashboard</Link> : null
-                 }
+                 {/* {
+                    user ? <Link href="/dashboard/customer/profile" className="hover:text-primary transition  ease-in-out">Dashboard</Link> : null
+                 } */}
                 {
-                    user?  <ProfileIcon/> : <div >
+                    user ? <ProfileIcon/>
+                    : <div >
                     <Link href="/login" className="hover:text-primary transition  mr-3">
                       <Button size="sm" className="cursor-pointer hover:bg-primary transition ease-in-out" variant="outline">
                         login

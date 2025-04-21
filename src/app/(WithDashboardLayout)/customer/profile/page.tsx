@@ -1,9 +1,9 @@
-
+import React from 'react';
 
 const customerProfile = () => {
     return (
         <div>
-           <h1>Cusotmer dashboard</h1> 
+            <h1>custme profile</h1>
         </div>
     );
 };

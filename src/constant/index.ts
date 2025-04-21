@@ -1,3 +1,5 @@
 export const protectedRoutes = [
-    "/find-meals",
+    /^\/login$/,
+    /^\/customer\/trackOrders\/.+$/,
+    /^\/customer\/.+$/,
 ]

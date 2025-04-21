@@ -15,6 +15,8 @@ export const middleware = async (request: NextRequest) =>{
 
     const {pathname} = request.nextUrl
 
+    console.log(pathname);
+
     const userInfo = await getCurrentUser()
     
     if(!userInfo){
@@ -37,13 +39,16 @@ export const middleware = async (request: NextRequest) =>{
         }
 
     }
-    return NextResponse.redirect(new URL('/', request.url))
+    // return NextResponse.redirect(new URL('/', request.url))
 
 }
 
 
 export const config = {
-    matcher:[
+    matcher: [
+        "/login",
         "/find-meals",
+        "/customer/trackOrders/:page",
+        "/customer/:path"
     ],
 }

@@ -6,7 +6,9 @@ import {
     UserRound,
     Car,
     View,
-    Logs
+    Logs,
+    Settings
+
   } from "lucide-react"
   
 
@@ -19,6 +21,8 @@ import {
   } from "@/components/ui/sidebar"
 import { NavMain } from "./Dashboard-nav"
 import { NavUser } from "./Dashboard-NavUser"
+import { useUser } from "@/context/UserContext"
+import { useState } from "react"
 
   
   
@@ -27,33 +31,48 @@ import { NavUser } from "./Dashboard-NavUser"
   
   
   const data = {
-      user: {
-        name: "shadcn",
-        email: "m@example.com",
-        avatar: "/avatars/shadcn.jpg",
-      },
       navMain: { 
-       user: [ 
+       customer: [ 
+        {
+          title:"profile",
+          url:"/dashboard/customer/profile",
+          icon: UserRound,
+          isAction: false,
+         
+        },
           {
-            title: "My profile",
-            url: "/dashboard",
-            icon: UserRoundPen,
+            title: "Select-meals",
+            url: "/dashboard/customer/select-meals",
+            icon: Logs,
             isActive: false,
           },
           {
-            title: "View Orders ",
-            url: "/dashboard/user/vieworder",
+            title: "Track-Orders",
+            url: "/dashboard/customer/trackOrders",
             icon:  View,
-            isActive: false,
+            isActive: true,
+            items: [
+              {
+                title: "Order-History",
+                url: "/dashboard/customer/trackOrders/history",
+              },
+              {
+                title: "Order-Ongoing",
+                url: "/dashboard/customer/trackOrders/ongoing",
+              },
+            
+            ],
           },{
-            title:"Order Tracking",
-            url:"/dashboard/user/ordertracking",
-            icon: Logs,
+            title:"Preferences",
+            url:"/dashboard/customer/preferences",
+            icon:  Settings,
             isAction: false
-          }
+          },
+         
+
   
         ],
-        admin: [ 
+         provider: [ 
           {
             title: "My profile",
             url: "/dashboard",
@@ -88,24 +107,34 @@ import { NavUser } from "./Dashboard-NavUser"
   
   export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   
+      const {user, setIsLoading} = useUser()
+
+     
   
-    
-  
+
       return (
         <Sidebar className="" collapsible="icon" {...props}>
   
           <SidebarContent className="mt-20" >
   
-            
-               <NavMain items={data.navMain.admin} /> 
-              {/* :<NavMain items={data.navMain.user} /> */}
-  
+          {/* <NavMain items={link} />  */}
+               {/* {
+                user?.role == "customer" || "provider"? <NavMain items={link} /> 
+                :<NavMain items={data.navMain.provider} />
+               } */}
+
+              {
+                user?.role == "provider" ? <NavMain items={data?.navMain?.provider} />
+                : <NavMain items={data?.navMain?.customer} /> 
+                
+              }
+               
           
           </SidebarContent>
   
   
           <SidebarFooter>
-            <NavUser user={data.user} />
+            <NavUser user={user} setIsLoading={setIsLoading} />
           </SidebarFooter>
           
           <SidebarRail />
