@@ -35,7 +35,7 @@ import { useState } from "react"
        customer: [ 
         {
           title:"profile",
-          url:"/dashboard/customer/profile",
+          url:"/customer/profile",
           icon: UserRound,
           isAction: false,
          

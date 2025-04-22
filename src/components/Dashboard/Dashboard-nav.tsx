@@ -18,6 +18,7 @@ import {
   SidebarMenuSubItem,
 } from "@/components/ui/sidebar"
 import Link from "next/link"
+import { useUser } from "@/context/UserContext"
 
 
 type Titems = {
@@ -41,12 +42,12 @@ export function NavMain({
 {
   
    
-
+  const {user } = useUser()
 
   return (
     
     <SidebarGroup>
-      <SidebarGroupLabel className="text-xl uppercase text-black py-4 "> Dashboard</SidebarGroupLabel>
+      <SidebarGroupLabel className=" text-xl text-black py-4 ">{`${user?.role} Dashboard`}</SidebarGroupLabel>
       <SidebarMenu>
         {items?.map((item) => (
           <Collapsible

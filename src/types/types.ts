@@ -6,4 +6,5 @@ export type Tuser = {
     name: string
     phone:string,
     role:  "customer"| "provider",
+    address?: string
 }

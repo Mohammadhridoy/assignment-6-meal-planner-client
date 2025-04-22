@@ -50,6 +50,7 @@ const LoginForm = () => {
         }
     
       }
+      
 
     return (
         <div className="shadow-sm md:w-2/6 p-6 rounded-2xl ">

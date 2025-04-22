@@ -1,9 +1,10 @@
+import CustomerProfile from '@/components/customer/profile/CustomerProfile';
 import React from 'react';
 
 const customerProfile = () => {
     return (
         <div>
-            <h1>custme profile</h1>
+            <CustomerProfile/>
         </div>
     );
 };
