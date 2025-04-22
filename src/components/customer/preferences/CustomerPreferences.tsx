@@ -3,8 +3,10 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
+import { updatePreferences } from "@/services/CustomerServices";
 import { Controller, FieldValues, useForm } from "react-hook-form";
 import Select from 'react-select';
+import { toast } from "sonner";
 
 type TRestriction = {
     label:string,
@@ -60,6 +62,24 @@ const CustomerPreferences = () => {
         )
         
         console.log(clearData);
+
+        try{
+            const res = await updatePreferences(clearData)
+             
+             if(res.status){
+                toast.success(res?.message)
+                reset({
+                    dietaryRestrictions:[],
+                    preferredCuisines:[ ],
+                    portionSize:null
+
+                })
+              }else{ 
+                toast.error(res?.message)
+              }
+            } catch(error:any){
+              console.error(error)
+           }
 
         
 
@@ -134,7 +154,7 @@ const CustomerPreferences = () => {
 
                     {/* Submit Button */}
                     <div className="pt-4">
-                        <Button type="submit" className="w-full">
+                        <Button type="submit" className="w-full cursor-pointer">
                         Save Preferences
                         </Button>
                     </div>

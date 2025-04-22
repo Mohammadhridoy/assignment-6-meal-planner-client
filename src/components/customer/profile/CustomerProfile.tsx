@@ -1,4 +1,5 @@
 "use client"
+import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
     Card,
@@ -30,6 +31,7 @@ const CustomerProfile =  ({singlecustomer}:{singlecustomer:Tuser} ) => {
     
     const authUser = singlecustomer
 
+    console.log(authUser);
    
 
     const form = useForm();
@@ -86,7 +88,8 @@ const CustomerProfile =  ({singlecustomer}:{singlecustomer:Tuser} ) => {
        
         <div className="lg:flex justify-between  lg:gap-10 ">
             {/* profile card */}
-            <div className=" shadow-none pb-4 md:pb-4 lg:pb-0  lg:w-2/5">
+           <div className="lg:w-2/5">
+           <div className=" shadow-none pb-4 md:pb-4 lg:pb-2  ">
             <Card className="">
       
             <CardContent>
@@ -112,7 +115,7 @@ const CustomerProfile =  ({singlecustomer}:{singlecustomer:Tuser} ) => {
                     <MapPinHouse className="text-[16px]" />
                     
                 {
-                    authUser?.address ? <h1 className="text-[16px]">{authUser?.address}</h1> : "Dhamrai,Dhaka"
+                    authUser?.address ? <h1 className="text-[16px]">{authUser?.address}</h1> : "N/A"
                 }
                 </div>
 
@@ -123,11 +126,54 @@ const CustomerProfile =  ({singlecustomer}:{singlecustomer:Tuser} ) => {
             </Card>
                 
             </div>
+            {/* Show preferences */}
+            <div className=" shadow-none  md:pb-4 lg:pb-0 ">
+                
+            <Card className="">
+            <h1 className=" text-xl border-b-2 pb-2 text-left pl-6"> My Preferences</h1>
+            <CardContent>
+                <div className="" >
+            
+                <h1 className="text-xl text-left font-semibold pb-2">Dietary Restrictions </h1>
+                {
+                   authUser?.preferences?.dietaryRestrictions.map((item) =>
+                        <Badge className="text-[16px] text-white cursor-pointer">{item}</Badge>
+                    )
+                }
+               
+            
+                </div>
+              
+                <div className="py-2" >
+            
+                <h1 className="text-xl text-left font-semibold pb-2">Preferred Cuisines </h1>
+                {
+                   authUser?.preferences?.preferredCuisines.map((item) =>
+                        <Badge className="text-[16px] text-white cursor-pointer m-1 flex-wrap">{item}</Badge>
+                    )
+                }
+               
+            
+                </div>
+                <div className="pb-2 " >
+                   
+                <h1 className="text-xl text-left font-semibold pb-2">Portion Size </h1>
+                <Badge className="text-[16px] text-white cursor-pointer m-1 flex-wrap">{authUser?.preferences?.portionSize}</Badge>
+                </div>
+
+            </CardContent>
+            <CardFooter className="flex justify-center align-middle">
+                
+            </CardFooter>
+            </Card>
+                
+            </div>
+           </div>
 
 
 
             {/* edit profile card options */}
-            <div className="md:w-full border-2 rounded-md p-3 md:p-5 lg:p-8 ">
+            <div className="md:w-full border-2 rounded-md p-3 md:p-5 lg:p-8  ">
              <h1 className="font-bold xl md:text-2xl  lg:text-3xl"> Profile </h1>
              <h1 className="font-semibold  py-2 text-gray-400  "> Customer Information</h1>
              {/* update input fields  */}
@@ -201,7 +247,7 @@ const CustomerProfile =  ({singlecustomer}:{singlecustomer:Tuser} ) => {
                     </div>
 
 
-                <Button className=" mt-3  text-white text-xl p-5 shadow-sm " type="submit">
+                <Button className=" mt-3  text-white text-xl p-5 shadow-sm cursor-pointer " type="submit">
                     Save
                 </Button>
 
@@ -247,7 +293,7 @@ const CustomerProfile =  ({singlecustomer}:{singlecustomer:Tuser} ) => {
               
 
 
-                <Button className=" mt-3  text-white text-xl p-5 shadow-sm " type="submit">
+                <Button className=" mt-3  text-white text-xl p-5 shadow-sm cursor-pointer" type="submit">
                     Save
                 </Button>
                 </form>

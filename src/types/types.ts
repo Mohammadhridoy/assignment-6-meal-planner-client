@@ -7,5 +7,11 @@ export type Tuser = {
     phone:string,
     role:  "customer"| "provider",
     address?: string
-    _id?:string
+    _id?:string,
+    preferences: {
+        dietaryRestrictions:string[],
+        preferredCuisines: string[],
+        portionSize: "small"| "medium" | "large"
+    
+    }
 }
