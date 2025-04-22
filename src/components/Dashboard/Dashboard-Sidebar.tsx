@@ -42,29 +42,29 @@ import { useState } from "react"
         },
           {
             title: "Select-meals",
-            url: "/dashboard/customer/select-meals",
+            url: "/customer/select-meals",
             icon: Logs,
             isActive: false,
           },
           {
             title: "Track-Orders",
-            url: "/dashboard/customer/trackOrders",
+            url: "/customer/trackOrders",
             icon:  View,
             isActive: true,
             items: [
               {
                 title: "Order-History",
-                url: "/dashboard/customer/trackOrders/history",
+                url: "/customer/trackOrders/history",
               },
               {
                 title: "Order-Ongoing",
-                url: "/dashboard/customer/trackOrders/ongoing",
+                url: "/customer/trackOrders/ongoing",
               },
             
             ],
           },{
             title:"Preferences",
-            url:"/dashboard/customer/preferences",
+            url:"/customer/preferences",
             icon:  Settings,
             isAction: false
           },

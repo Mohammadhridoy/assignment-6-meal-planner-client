@@ -45,12 +45,13 @@ export function NavUser({
   const pathname = usePathname()
   const router = useRouter()
  
-  const {user, setIsLoading} = useUser()
+  const {user, setIsLoading, setUser} = useUser()
 
   const handleLogout = () =>{
     logout()
     toast.warning("logout")
     setIsLoading(true)
+    setUser(null)
       if(protectedRoutes.some(route => route.test(pathname))){
             router.push("/")
         }

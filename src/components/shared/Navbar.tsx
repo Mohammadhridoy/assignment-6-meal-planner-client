@@ -15,7 +15,7 @@ import { protectedRoutes } from "@/constant";
 const Navbar = () => {
     const [open, setOpen] = useState(false)
 
-    const {user, setIsLoading} = useUser()
+    const {user, setIsLoading , setUser} = useUser()
     
     const pathname = usePathname()
     const router = useRouter()
@@ -23,6 +23,7 @@ const Navbar = () => {
 const handlelogout = () =>{
     logout()
     setIsLoading(true)
+    setUser(null)
     if(protectedRoutes.some(route => route.test(pathname))){
         router.push("/")
     }
