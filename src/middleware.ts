@@ -7,8 +7,8 @@ const authRoutes = ['/login', '/register']
 
 
 const roleBasedPrivateRoutes = {
-    customer:[/^\/customer/, /^\/find-meals/],
-    privider:[/^\/provider/]
+    customer:[/^\/customer/, ],
+    provider:[/^\/provider/]
 }
 
 export const middleware = async (request: NextRequest) =>{
@@ -34,12 +34,17 @@ export const middleware = async (request: NextRequest) =>{
 
     if(userInfo?.role && roleBasedPrivateRoutes[userInfo?.role as Role ]){
         const routes = roleBasedPrivateRoutes[userInfo?.role as Role]
-        if(routes.some((route) => pathname.match(route))){
+        
+        if(routes.some((route) => route.test(pathname))){
             return NextResponse.next()
         }
 
+
+        
     }
-    // return NextResponse.redirect(new URL('/', request.url))
+    return NextResponse.redirect(new URL('/', request.url))
+
+    
 
 }
 
@@ -47,8 +52,8 @@ export const middleware = async (request: NextRequest) =>{
 export const config = {
     matcher: [
         "/login",
-        "/find-meals",
         "/customer/trackOrders/:page",
-        "/customer/:path"
+        "/customer/:path*",
+        "/provider/:path*"
     ],
 }

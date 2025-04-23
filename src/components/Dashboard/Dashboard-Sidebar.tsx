@@ -7,7 +7,8 @@ import {
     Car,
     View,
     Logs,
-    Settings
+    Settings,
+    SquarePen
 
   } from "lucide-react"
   
@@ -74,27 +75,21 @@ import { useState } from "react"
         ],
          provider: [ 
           {
-            title: "My profile",
-            url: "/dashboard",
+            title: "Profile",
+            url: "/provider/profile",
             icon: UserRoundPen,
             isActive: false,
           },
           {
-            title: "Users",
-            url: "/dashboard/admin/users",
-            icon: UserRound,
+            title: "Post Meal Manu",
+            url: "/provider/post-meal-menu",
+            icon: SquarePen,
             isActive: true,
           },
           {
-            title: "Products",
-            url: "/dashboard/admin/products",
-            icon:  Car,
-            isActive: true,
-          },
-          {
-            title: "Orders",
-            url: "/dashboard/admin/orders",
-            icon: CalendarArrowDown,
+            title: "View Order",
+            url: "/provider/View Order",
+            icon:  View,
             isActive: true,
           },
   

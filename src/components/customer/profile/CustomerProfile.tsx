@@ -31,7 +31,7 @@ const CustomerProfile =  ({singlecustomer}:{singlecustomer:Tuser} ) => {
     
     const authUser = singlecustomer
 
-    console.log(authUser);
+
    
 
     const form = useForm();
@@ -136,8 +136,8 @@ const CustomerProfile =  ({singlecustomer}:{singlecustomer:Tuser} ) => {
             
                 <h1 className="text-xl text-left font-semibold pb-2">Dietary Restrictions </h1>
                 {
-                   authUser?.preferences?.dietaryRestrictions.map((item) =>
-                        <Badge className="text-[16px] text-white cursor-pointer">{item}</Badge>
+                   authUser?.preferences?.dietaryRestrictions.map((item, index) =>
+                        <Badge key={index} className="text-[16px] text-white cursor-pointer">{item}</Badge>
                     )
                 }
                
@@ -148,8 +148,8 @@ const CustomerProfile =  ({singlecustomer}:{singlecustomer:Tuser} ) => {
             
                 <h1 className="text-xl text-left font-semibold pb-2">Preferred Cuisines </h1>
                 {
-                   authUser?.preferences?.preferredCuisines.map((item) =>
-                        <Badge className="text-[16px] text-white cursor-pointer m-1 flex-wrap">{item}</Badge>
+                   authUser?.preferences?.preferredCuisines.map((item, index) =>
+                        <Badge key={index} className="text-[16px] text-white cursor-pointer m-1 flex-wrap">{item}</Badge>
                     )
                 }
                

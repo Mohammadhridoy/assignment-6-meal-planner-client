@@ -18,13 +18,16 @@ const UserProvider = ({children}: {children: React.ReactNode}) =>{
     const [user, setUser] = useState<Tuser | null>(null)
     const [isLoading, setIsLoading] = useState(true)
 
-    const handleUser = async() =>{
-        const user = await getCurrentUser()
-        setUser(user)
-        setIsLoading(false)
-    }
+   
 
     useEffect(()=>{
+
+        const handleUser = async() =>{
+            const user = await getCurrentUser()
+            setUser(user)
+            setIsLoading(false)
+        }
+
         handleUser()
     },[isLoading])
 

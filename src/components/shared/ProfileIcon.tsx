@@ -12,6 +12,7 @@ import { usePathname, useRouter } from "next/navigation";
 
 const ProfileIcon = () => {
 
+  const {user} = useUser()
     const { setIsLoading} = useUser()
     const pathname = usePathname()
     const router = useRouter()
@@ -22,6 +23,16 @@ const ProfileIcon = () => {
            if(protectedRoutes.some(route => route.test(pathname))){
                 router.push("/")
             }
+    }
+
+    const getDashboardpath = (role: string | undefined | null)=>{
+      switch(role){
+        case "provider": 
+        return "/provider/profile"
+        case "customer": 
+        return "customer/profile"
+        default: return "/"
+      }
     }
 
     return (
@@ -42,11 +53,13 @@ const ProfileIcon = () => {
             <DropdownMenuLabel>My Account</DropdownMenuLabel>
             <DropdownMenuSeparator />
             <DropdownMenuGroup>
-             <Link href="/customer/profile"> 
-             <DropdownMenuItem  className="cursor-pointer">
-              Dashboard 
-              </DropdownMenuItem>
-             </Link>
+            {
+              user?.role &&  <Link href={getDashboardpath(user?.role)}> 
+              <DropdownMenuItem  className="cursor-pointer">
+               Dashboard 
+               </DropdownMenuItem>
+              </Link>
+            }
               <DropdownMenuItem>
                Order Meal
                
