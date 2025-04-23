@@ -53,7 +53,7 @@ const LoginForm = () => {
       
 
     return (
-        <div className="shadow-sm md:w-2/6 p-6 rounded-2xl ">
+        <div className="shadow-sm md:w-2/6 p-6 rounded-2xl border-2  ">
        <Link href="/" className="text-xl font-bold text-primary flex justify-center items-center py-2">
             MealMate
             </Link>

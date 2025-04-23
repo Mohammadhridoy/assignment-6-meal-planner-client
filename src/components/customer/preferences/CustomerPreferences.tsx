@@ -61,7 +61,7 @@ const CustomerPreferences = () => {
             })
         )
         
-        console.log(clearData);
+      
 
         try{
             const res = await updatePreferences(clearData)
@@ -90,8 +90,8 @@ const CustomerPreferences = () => {
 
 
     return (
-        <div>
-            <Card className="max-w-2xl mx-auto mt-10">
+        <div >
+            <Card className="max-w-2xl mx-auto mt-10 ">
                 <CardHeader>
                     <CardTitle className="text-2xl">Dietary Preferences</CardTitle>
                 </CardHeader>

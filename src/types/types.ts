@@ -13,5 +13,10 @@ export type Tuser = {
         preferredCuisines: string[],
         portionSize: "small"| "medium" | "large"
     
+    },
+    specialties :{
+        cuisinespecialties: string[] 
+        availability: string[]
+        price:string
     }
 }

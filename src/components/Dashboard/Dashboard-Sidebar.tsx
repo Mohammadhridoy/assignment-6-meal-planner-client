@@ -73,7 +73,13 @@ import { useState } from "react"
 
   
         ],
-         provider: [ 
+         provider: [
+          {
+            title: "Dashboard",
+            url: "/provider/dashboard",
+            icon: UserRoundPen,
+            isActive: false,
+          },
           {
             title: "Profile",
             url: "/provider/profile",
@@ -88,7 +94,7 @@ import { useState } from "react"
           },
           {
             title: "View Order",
-            url: "/provider/View Order",
+            url: "/provider/View-Order",
             icon:  View,
             isActive: true,
           },

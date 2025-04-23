@@ -1,9 +1,19 @@
+import ProviderProfile from "@/components/userProvider/profile/ProviderProfile";
+import UpdateProvider from "@/components/userProvider/profile/UpdateProvider";
+import { getCurrentUser } from '@/services/AuthServices';
+import { getSingleCustomer } from '@/services/CustomerServices';
 
+const Profile =async () => {
 
-const Profile = () => {
+    const user = await getCurrentUser()
+        
+    
+         const {data:singlecustomer} = await getSingleCustomer(user?.email)
+
     return (
         <div>
-            dddd
+            <ProviderProfile  singlecustomer={singlecustomer} />
+            
         </div>
     );
 };

@@ -19,20 +19,16 @@ import { MailCheck, MapPinHouse, PhoneCall, } from "lucide-react";
 
 import { useForm, SubmitHandler, FieldValues, } from "react-hook-form";
 import { toast } from "sonner";
+import UpdateProvider from "./UpdateProvider";
 
 
 
+const ProviderProfile = ({singlecustomer}:{singlecustomer:Tuser} ) => {
 
 
-
-const CustomerProfile =  ({singlecustomer}:{singlecustomer:Tuser} ) => {
-
-
-    
     const authUser = singlecustomer
 
 
-   
 
     const form = useForm();
         
@@ -40,7 +36,7 @@ const CustomerProfile =  ({singlecustomer}:{singlecustomer:Tuser} ) => {
 
         
           const onSubmit:SubmitHandler<FieldValues> = async (data) =>{
-        
+        console.log(data);
             const clearData = Object.fromEntries(
                 Object.entries(data).filter(([_, value ] )=> value !=="" && value !== undefined)
             )
@@ -48,21 +44,9 @@ const CustomerProfile =  ({singlecustomer}:{singlecustomer:Tuser} ) => {
         
 
            try{
-             
-            if(clearData?.currentpassword ){
-                const res = await updatePassword(clearData)
-                if(res.status){
-                    toast.success(res?.message )
-                    reset()
-                 
-                  }else{ 
-                    toast.error(res?.message)
-                  }
-    
-             }
 
           
-             if(!clearData?.currentpassword){
+            
               
              const res = await updatedCustomerInfo(clearData)
              
@@ -71,8 +55,9 @@ const CustomerProfile =  ({singlecustomer}:{singlecustomer:Tuser} ) => {
                 reset()
               }else{ 
                 toast.error(res?.message)
+
               }
-             }
+             
 
            }catch(error:any){
               console.error(error)
@@ -80,12 +65,9 @@ const CustomerProfile =  ({singlecustomer}:{singlecustomer:Tuser} ) => {
         
           }
 
-         
 
 
     return (
-      
-       
         <div className="lg:flex justify-between  lg:gap-10 ">
             {/* profile card */}
            <div className="lg:w-2/5">
@@ -126,18 +108,18 @@ const CustomerProfile =  ({singlecustomer}:{singlecustomer:Tuser} ) => {
             </Card>
                 
             </div>
-            {/* Show preferences */}
+            {/* Show update Specialties */}
             <div className=" shadow-none  md:pb-4 lg:pb-0 ">
                 
             <Card className="">
-            <h1 className=" text-xl border-b-2 pb-2 text-left pl-6"> My Preferences</h1>
+            <h1 className=" text-xl border-b-2 pb-2 text-left pl-6"> My Specialties</h1>
             <CardContent>
                 <div className="" >
             
-                <h1 className="text-xl text-left  pb-2">Dietary Restrictions </h1>
+                <h1 className="text-xl text-left  pb-2">Cuisine Specialties </h1>
                 {
-                   authUser?.preferences?.dietaryRestrictions.map((item, index) =>
-                        <Badge key={index} className="text-[16px] text-white cursor-pointer m-1 flex-wrap">{item}</Badge>
+                   authUser?.specialties?.cuisinespecialties?.map((item, index) =>
+                        <Badge key={index} className="text-[16px] text-white  cursor-pointer m-1 flex-wrap">{item}</Badge>
                     )
                 }
                
@@ -146,19 +128,20 @@ const CustomerProfile =  ({singlecustomer}:{singlecustomer:Tuser} ) => {
               
                 <div className="py-2" >
             
-                <h1 className="text-xl text-left  pb-2">Preferred Cuisines </h1>
+                <h1 className="text-xl text-left pb-2">Availability </h1>
                 {
-                   authUser?.preferences?.preferredCuisines.map((item, index) =>
+                   authUser?.specialties?.availability?.map((item, index) =>
                         <Badge key={index} className="text-[16px] text-white cursor-pointer m-1 flex-wrap">{item}</Badge>
                     )
                 }
                
             
                 </div>
-                <div className="pb-2 " >
+                <div className="pb-2 flex items-center  " >
                    
-                <h1 className="text-xl text-left  pb-2">Portion Size </h1>
-                <Badge className="text-[16px] text-white cursor-pointer m-1 flex-wrap">{authUser?.preferences?.portionSize}</Badge>
+                <h1 className="text-xl text-left  pb-2">Price:</h1>
+               
+                <h1 className="text-[16px] cursor-pointer m-1 ">{`$ ${authUser?.specialties?.price}`} </h1>
                 </div>
 
             </CardContent>
@@ -173,8 +156,8 @@ const CustomerProfile =  ({singlecustomer}:{singlecustomer:Tuser} ) => {
 
 
             {/* edit profile card options */}
-            <div className="md:w-full border-2 rounded-md p-3 md:p-5 lg:p-8  ">
-             <h1 className="font-bold xl md:text-2xl  lg:text-3xl"> Profile </h1>
+            <div className="md:w-full  rounded-md p-3 md:p-5 lg:p-8  ">
+             <h1 className="font-bold xl md:text-2xl  lg:text-3xl">Edit Profile </h1>
              <h1 className="font-semibold  py-2 text-gray-400  "> Customer Information</h1>
              {/* update input fields  */}
              <div>
@@ -251,63 +234,23 @@ const CustomerProfile =  ({singlecustomer}:{singlecustomer:Tuser} ) => {
                     Save
                 </Button>
 
-                
-               
-                {/* form-02 */}
-               
-                 <div className="pt-10">
-                 <h1 className="font-semibold text-xl  pb-5">Change Password </h1> 
-                 <div className="md:flex    items-center  md:gap-11 lg:gap-7  ">
-                
-                <FormField
-                control={form.control}
-                name="currentpassword"
-                render={({ field }) => (
-                    <FormItem>
-                    <FormLabel> Current Password</FormLabel>
-                    <FormControl>
-                        <Input className="md:w-44 lg:w-96"  placeholder="Enter your current password "  type="password" {...field} value={field.value || ''} />
-                    </FormControl>
-                    <FormDescription />
-                    <FormMessage />
-                    </FormItem>
-                )} />
-
-                <FormField
-                control={form.control}
-                name="newpassword"
-                render={({ field }) => (
-                    <FormItem>
-                    <FormLabel>New password</FormLabel>
-                    <FormControl>
-                        <Input className="md:w-44 lg:w-96" type="password" placeholder="Enter new password" {...field} value={field.value || ''} />
-                    
-                    </FormControl>
-                    <FormDescription />
-                    <FormMessage />
-                    </FormItem>
-                )} />
-                </div>
-                 </div>
-
-              
-
-
-                <Button className=" mt-3  text-white text-xl p-5 shadow-sm cursor-pointer" type="submit">
-                    Save
-                </Button>
+    
                 </form>
                 </Form>
              </div>
          
 
+             <UpdateProvider/>
+         
+              
+            
              
             </div>
+
+            
+
         </div>
-        
-    
-        
     );
 };
 
-export default CustomerProfile;
+export default ProviderProfile;
