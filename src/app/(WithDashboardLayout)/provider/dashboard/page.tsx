@@ -1,12 +1,18 @@
 import ManageMenus from "@/components/provider/Dashboard/ManageMenus";
+import { getAllMeals } from "@/services/ProviderService";
 
 
-const page = () => {
+const manageManus = async () => {
+
+
+    const { data: getallmeals } = await getAllMeals()
+   
+
     return (
         <div>
-            <ManageMenus/>
+            <ManageMenus  allMeals={getallmeals}/>
         </div>
     );
 };
 
-export default page;
+export default manageManus;

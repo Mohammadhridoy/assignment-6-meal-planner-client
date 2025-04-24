@@ -20,39 +20,53 @@ import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { useState } from "react";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { X } from "lucide-react";
+import { createMeal } from "@/services/ProviderService";
+import { toast } from "sonner";
+
+
+
 
 
 
 const CreateMeals = () => {
 
-    const[ingredients, setIngredients] = useState<string[]>([])
+    const[ingredients, setIngredients] = useState<string[]>([ ])
     const[tags, setTags] = useState<string[]>([])
+
 
     const form = useForm();
     
       const {formState:{ isSubmitting}, reset} = form
     
       const onSubmit:SubmitHandler<FieldValues> = async (data) =>{
-      console.log(data);
+      
 
       const filupAlldata = {
-        ...data, 
-        ingredients, tags
-      }
-      console.log(filupAlldata);
-
-      setIngredients([])
+            mealname: data?.mealName?.trim()  || " ",
+            category : data?.category?.trim(),
+            description : data?.description?.trim() || " ",
+            image: data?.image?.trim() || " ",
+            ingredients : ingredients.map((item) => item?.trim?.() || item), 
+            portionSize:data?.portionSize?.trim() || " ",
+            preparationTime : data?.preparationTime?.trim() || " ",
+            price : data?.price?.trim() || " ",
+            tags: tags.map((item) => item?.trim?.() || item)
+                }
+      console.log("filupAlldata", filupAlldata);
 
 
         try{
-        //   const res = await registerUser( data)
-        //   console.log(res);
-        //   if(res.status){
-        //     toast.success(res?.message)
-        //     reset()
-        //   }else{ 
-        //     toast.error(res?.message)
-        //   }
+          const res = await createMeal(filupAlldata )
+          
+          console.log(res);
+          if(res.status){
+            toast.success(res?.message)
+            reset()
+            setIngredients([])
+            setTags([])
+          }else{ 
+            toast.error(res?.message)
+          }
     
         }catch(error: any){
           console.error(error);
@@ -62,7 +76,7 @@ const CreateMeals = () => {
 
 
       const handleIngredientsButton = (data:string ) =>{
-        setIngredients((prevIngredients)=>[...prevIngredients, data])
+        setIngredients((prevIngredients)=> [ ...prevIngredients, data])
 
       }
       const handleTagsButton = (data:string) =>{
@@ -80,8 +94,8 @@ const CreateMeals = () => {
     return (
  
               <Dialog >
-      <DialogTrigger className="flex justify-center items-center md:flex md:justify-end md:items-center" asChild>
-        <Button  variant="outline">Create Meal</Button>
+      <DialogTrigger className="" asChild>
+        <Button  className="bg-primary cursor-pointer text-white hover:text-black transition-all ease-in delay-75" variant="outline">Create Meal</Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-md ">
         <DialogHeader>
@@ -93,7 +107,7 @@ const CreateMeals = () => {
         <form onSubmit={form.handleSubmit(onSubmit)}>
         <FormField
           control={form.control}
-          name=" mealname "
+          name="mealName"
           render={({ field }) => (
             <FormItem>
              <FormLabel>Meal Name </FormLabel>
@@ -235,7 +249,7 @@ const CreateMeals = () => {
               type="button"
               onClick={()=>{
                 handleTagsButton(field.value)
-                form.setValue("tags"," ")
+                form.setValue("tags", " ")
               }}
                > Add </button>
 
