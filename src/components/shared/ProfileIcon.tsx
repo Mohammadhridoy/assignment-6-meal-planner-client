@@ -28,7 +28,7 @@ const ProfileIcon = () => {
     const getDashboardpath = (role: string | undefined | null)=>{
       switch(role){
         case "provider": 
-        return "/provider/profile"
+        return "/provider/dashboard"
         case "customer": 
         return "customer/profile"
         default: return "/"
