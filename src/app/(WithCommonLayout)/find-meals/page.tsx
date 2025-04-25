@@ -2,6 +2,7 @@ import FilterCard from "@/components/find-meals/FilterCard";
 import ShowMealsData from "@/components/find-meals/ShowMealsData";
 import { getAllMenus } from "@/services/ProviderService";
 import { IMenus } from "@/types/types";
+import { Suspense } from "react";
 
 
 type SearchParams = Promise<{[key:string]:string | string[] | undefined}>
@@ -18,7 +19,9 @@ const findMeals = async ({searchParams}: { searchParams :SearchParams}) => {
         <div className="h-screen  mt-4">
             {/* filter data */}
             <div className="lg:h-1/3 lg:px-[84px]  ">
+            <Suspense fallback={<div>Loading filters...</div>}>
                 <FilterCard  />
+                </Suspense>
             </div>
             {/* Showing Data */}
             <div className=" lg:sticky">

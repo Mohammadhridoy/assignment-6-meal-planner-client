@@ -24,9 +24,9 @@ const persistedCart = persistReducer(persistOptions, cartReducer);
 export const makeStore = () => {
   return configureStore({
     reducer: {
-      cart: cartReducer,
+      cart: persistedCart,
     },
-    middleware: (getDefaultMiddlewares: any) =>
+    middleware: (getDefaultMiddlewares) =>
       getDefaultMiddlewares({
         serializableCheck: {
           ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],

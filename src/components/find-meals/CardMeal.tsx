@@ -5,6 +5,7 @@ import { Badge } from "../ui/badge";
 import { Button } from "../ui/button";
 import { useAppDispatch } from "@/redux/hook";
 import { addProduct } from "@/redux/features/cartSlice";
+import Image from "next/image";
 
 
 const CardMeal = ({meal}:{meal:TMeal}) => {
@@ -20,10 +21,15 @@ const CardMeal = ({meal}:{meal:TMeal}) => {
     return (
         <div >
             <Card className=" lg:w-10/12 lg:h-10/12 max-w-sm rounded-2xl overflow-hidden hovershadow-xl transition-shadow ">
-            <img 
+            {/* <img 
              src={meal.image}
              alt={meal.mealname}
-             className="h-48 w-full lg:w-[500px] object-cover"/>
+             className="h-48 w-full lg:w-[500px] object-cover"/> */}
+            <Image
+                    src={meal.image}
+                    className="h-48 w-full lg:w-[500px] object-cover" alt={""}            />
+
+
              <CardContent className="px-4 space-y-2">
                 <div className="flex justify-between items-center">
                     <h2 className="text-xl font-bold">{meal.mealname}</h2>

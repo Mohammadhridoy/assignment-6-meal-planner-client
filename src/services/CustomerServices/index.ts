@@ -85,7 +85,7 @@ export const updatePreferences = async (updatedPreferences:FieldValues) =>{
         )
         revalidateTag('CUSTOMER')
         return res.json()
-       }catch(error: any){
+       }catch(error:any){
          return Error(error)
        }
 } 

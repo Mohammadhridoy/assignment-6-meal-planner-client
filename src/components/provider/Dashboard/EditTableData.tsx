@@ -79,7 +79,7 @@ const[ingredients, setIngredients] = useState<string[]>([])
             toast.error(res?.message)
           }
     
-        }catch(error: any){
+        }catch(error){
           console.error(error);
         }
     
@@ -261,8 +261,8 @@ const[ingredients, setIngredients] = useState<string[]>([])
                 className="bg-black px-5 py-1 rounded-md text-white cursor-pointer "
                 type="button"
                 onClick={()=>{
-                  handleTagsButton( field.value as string )
-                  form.setValue("tags", " ")
+                  handleTagsButton( field.value.join(', ') )
+                  form.setValue("tags", [ ])
                 }}
                  > Add </button>
   

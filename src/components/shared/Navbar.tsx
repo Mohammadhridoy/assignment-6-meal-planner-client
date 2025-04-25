@@ -4,7 +4,7 @@ import Link from "next/link";
 import {  useState } from "react";
 import { Button } from "../ui/button";
 import { Sheet, SheetContent, SheetTitle, SheetTrigger } from "../ui/sheet";
-import { LogOut, Menu } from "lucide-react";
+import {  Menu } from "lucide-react";
 import ProfileIcon from "./ProfileIcon";
 import { useUser } from "@/context/UserContext";
 import { logout } from "@/services/AuthServices";

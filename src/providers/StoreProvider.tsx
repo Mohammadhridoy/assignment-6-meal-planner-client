@@ -3,7 +3,7 @@
 import { AppStore, makeStore } from "@/redux/store";
 import { ReactNode, useRef } from "react";
 import { Provider } from "react-redux";
-import { persistStore } from "redux-persist";
+// import { persistStore } from "redux-persist";
 
 
 
@@ -14,7 +14,8 @@ export default function StoreProvider({ children }: { children: ReactNode }) {
       storeRef.current = makeStore();
     }
   
-    const persistedStore = persistStore(storeRef.current);
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    // const persistedStore = persistStore(storeRef.current);
   
     return (
       <Provider store={storeRef.current}>

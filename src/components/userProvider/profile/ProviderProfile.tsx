@@ -11,7 +11,7 @@ import {
      FormLabel, FormMessage } from "@/components/ui/form";
 
 import { Input } from "@/components/ui/input"
-import {  updatedCustomerInfo, updatePassword } from "@/services/CustomerServices";
+import {  updatedCustomerInfo } from "@/services/CustomerServices";
 import { Tuser } from "@/types/types";
 
 import { MailCheck, MapPinHouse, PhoneCall, } from "lucide-react";
@@ -20,6 +20,7 @@ import { MailCheck, MapPinHouse, PhoneCall, } from "lucide-react";
 import { useForm, SubmitHandler, FieldValues, } from "react-hook-form";
 import { toast } from "sonner";
 import UpdateProvider from "./UpdateProvider";
+import Image from "next/image";
 
 
 
@@ -32,13 +33,14 @@ const ProviderProfile = ({singlecustomer}:{singlecustomer:Tuser} ) => {
 
     const form = useForm();
         
-          const {formState:{ isSubmitting}, reset} = form
+          const { reset} = form
 
         
           const onSubmit:SubmitHandler<FieldValues> = async (data) =>{
-        console.log(data);
+      
             const clearData = Object.fromEntries(
-                Object.entries(data).filter(([_, value ] )=> value !=="" && value !== undefined)
+                // eslint-disable-next-line @typescript-eslint/no-unused-vars
+                Object.entries(data).filter(([_ , value ] )=> value !=="" && value !== undefined)
             )
 
         
@@ -76,7 +78,13 @@ const ProviderProfile = ({singlecustomer}:{singlecustomer:Tuser} ) => {
       
             <CardContent>
                 <div className="  flex justify-center ">
-                    <img className="w-2/3 " src="https://i.ibb.co.com/Dgpw4zzR/profile.png" alt="" />
+                    {/* <img className="w-2/3 " src="https://i.ibb.co.com/Dgpw4zzR/profile.png" alt="" /> */}
+                    <Image
+                    src="/profile.png"
+                    width={200}
+                    height={200}
+                    alt="Picture of the author"
+                    />
                 </div>
                 <div className=" flex justify-start items-center gap-3 py-2" >
             

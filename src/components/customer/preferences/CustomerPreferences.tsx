@@ -53,7 +53,8 @@ const CustomerPreferences = () => {
             portionSize:data.portionSize?.value
         }
         const clearData = Object.fromEntries(
-            Object.entries(payload).filter(([_, value ] )=>{
+            Object.entries(payload).filter(([pair, value ] )=>{
+                if(pair === undefined) return false
                 if(value === undefined || value === null) return false
                 if(Array.isArray(value) && value.length === 0 ) return false
                 if(typeof value ==="string" && value.trim() === "") return false
@@ -77,7 +78,7 @@ const CustomerPreferences = () => {
               }else{ 
                 toast.error(res?.message)
               }
-            } catch(error:any){
+            } catch(error){
               console.error(error)
            }
 

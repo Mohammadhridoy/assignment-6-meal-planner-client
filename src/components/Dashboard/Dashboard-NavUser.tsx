@@ -1,7 +1,7 @@
 
 "use client"
 
-import {  Bell, ChevronsUpDown, Home, LogOut, Sparkles,} from "lucide-react"
+import {  ChevronsUpDown, Home, LogOut, Sparkles,} from "lucide-react"
 
 import {
   Avatar,

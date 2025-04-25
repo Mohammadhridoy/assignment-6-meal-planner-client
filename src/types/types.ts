@@ -1,4 +1,4 @@
-import { JSX } from "react"
+
 
 export type Tuser = {
     email:string,
@@ -26,7 +26,6 @@ export type Tuser = {
 
 
 export type TMeal= {
-    map(arg0: (item: TMeal) => JSX.Element): import("react").ReactNode
     mealname:string 
     description:string
     price: string

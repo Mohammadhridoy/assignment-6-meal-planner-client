@@ -68,7 +68,7 @@ const CreateMeals = () => {
             toast.error(res?.message)
           }
     
-        }catch(error: any){
+        }catch(error){
           console.error(error);
         }
     

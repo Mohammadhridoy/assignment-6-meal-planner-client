@@ -15,6 +15,7 @@ import {  updatedCustomerInfo, updatePassword } from "@/services/CustomerService
 import { Tuser } from "@/types/types";
 
 import { MailCheck, MapPinHouse, PhoneCall, } from "lucide-react";
+import Image from "next/image";
 
 
 import { useForm, SubmitHandler, FieldValues, } from "react-hook-form";
@@ -36,14 +37,19 @@ const CustomerProfile =  ({singlecustomer}:{singlecustomer:Tuser} ) => {
 
     const form = useForm();
         
-          const {formState:{ isSubmitting}, reset} = form
+          const { reset} = form
 
         
           const onSubmit:SubmitHandler<FieldValues> = async (data) =>{
         
-            const clearData = Object.fromEntries(
-                Object.entries(data).filter(([_, value ] )=> value !=="" && value !== undefined)
-            )
+            const clearData: Record<string, unknown> = {};
+
+                for (const key in data) {
+                const value = data[key];
+                if (value !== "" && value !== undefined) {
+                    clearData[key] = value;
+                }
+                }
 
         
 
@@ -74,7 +80,7 @@ const CustomerProfile =  ({singlecustomer}:{singlecustomer:Tuser} ) => {
               }
              }
 
-           }catch(error:any){
+           }catch(error){
               console.error(error)
            }
         
@@ -94,7 +100,13 @@ const CustomerProfile =  ({singlecustomer}:{singlecustomer:Tuser} ) => {
       
             <CardContent>
                 <div className="  flex justify-center ">
-                    <img className="w-2/3 " src="https://i.ibb.co.com/Dgpw4zzR/profile.png" alt="" />
+                    {/* <img className="w-2/3 " src="https://i.ibb.co.com/Dgpw4zzR/profile.png" alt="" /> */}
+                    <Image
+                        src="https://i.ibb.co.com/Dgpw4zzR/profile.png"
+                        
+                        alt="Picture of the author"
+                        />
+                
                 </div>
                 <div className=" flex justify-start items-center gap-3 py-2" >
             

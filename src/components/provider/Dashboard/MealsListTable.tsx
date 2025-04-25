@@ -15,6 +15,7 @@ import {  CircleCheck, DollarSign, X } from "lucide-react";
 import ToggleInTable from "./ToggleInTable";
 import DeleteTableData from "./DeleteTableData";
 import EditTableData from "./EditTableData";
+import Image from "next/image";
 
 
 
@@ -38,9 +39,16 @@ const MealsListTable = ({data}:{data:TMeal}) => {
                             </TableRow>
                         </TableHeader>
                         <TableBody>
-                            {data?.map((item:TMeal) => (
+                        {Array.isArray(data) && data.map((item: TMeal) => (
                             <TableRow className="" key={item?._id}>
-                                <TableCell className="font-medium"><img  className="rounded-full lg:h-20 lg:w-20 border-4 border-green-400 shadow-md" src={item?.image} alt=""  /></TableCell>
+                                <TableCell className="font-medium">
+                                    {/* <img  className="rounded-full lg:h-20 lg:w-20 border-4 border-green-400 shadow-md" src={item?.image} alt=""  /> */}
+                                    <Image
+                                    src={item?.image}
+                                    className="rounded-full lg:h-20 lg:w-20 border-4 border-green-400 shadow-md"
+                                    alt="Picture of the author"
+                                    />
+                                </TableCell>
                                 <TableCell className="text-center">
                                     {item?.mealname}
                                 </TableCell>

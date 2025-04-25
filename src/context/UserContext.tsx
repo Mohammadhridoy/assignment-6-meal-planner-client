@@ -7,7 +7,8 @@ import { createContext, Dispatch, SetStateAction, useContext, useEffect, useStat
 interface IUserProviderValues {
     user:Tuser | null,
     isLoading: boolean,
-    setUser: (user:Tuser| null) => void,
+    // setUser: (user:Tuser| null) => void,
+    setUser: Dispatch<SetStateAction<Tuser | null>>
     setIsLoading: Dispatch<SetStateAction<boolean>>
 }
 

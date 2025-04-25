@@ -62,18 +62,18 @@ const FilterCard = () => {
     const pathname = usePathname()
     const searchParams = useSearchParams()
   
-    const handleApplyFilters = () => {
-      const filters = {
-        searchTerm,
-        selectedCuisine,
-        selectedPortion,
-        selectedMealSlot,
-        selectedDietary,
+    // const handleApplyFilters = () => {
+    //   const filters = {
+    //     searchTerm,
+    //     selectedCuisine,
+    //     selectedPortion,
+    //     selectedMealSlot,
+    //     selectedDietary,
 
-      };
-      console.log("Filters Applied:", filters);
+    //   };
+    //   console.log("Filters Applied:", filters);
 
-    };
+    // };
 
     const handleSetQueryParam =  (query: string, value: string | number | boolean) => {
       const params = new URLSearchParams(searchParams.toString());

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 "use client"
 
 import Select from 'react-select';
@@ -59,6 +60,8 @@ const UpdateProvider = () => {
                 return true
             })
         )
+
+        
         
         console.log(clearData)
         
@@ -80,7 +83,7 @@ const UpdateProvider = () => {
              }
             
 
-          }catch(error:any){
+          }catch(error){
              console.error(error)
           }
         

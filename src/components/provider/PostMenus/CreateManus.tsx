@@ -92,7 +92,7 @@ const {control,  handleSubmit, reset} = form
                     toast.error(res?.message)
                   }
             
-                }catch(error: any){
+                }catch(error){
                   console.error(error);
                 }
 

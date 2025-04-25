@@ -1,8 +1,6 @@
 import { IMenus } from "@/types/types";
 import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
 import { CalendarIcon, ChefHat, Clock } from "lucide-react";
-
-import { Button } from "../ui/button";
 import CardMeal from "./CardMeal";
 
 type getallMenuProps = {
@@ -41,7 +39,7 @@ const ShowMealsData: React.FC<getallMenuProps> = ({ getAllMenu}) => {
                         <h4 className="font-semibold">Meals included:</h4>
                         <ul className="list-disc  mt-4 space-y-1 flex justify-start items-center ">
                             {
-                                meals.map((meal, idx)=>(
+                                meals.map((meal, )=>(
 
                                     <CardMeal  key={meal._id} meal={meal} />
                                     // <li key={idx} className="text-sm">
