@@ -90,7 +90,7 @@ const CustomerProfile =  ({singlecustomer}:{singlecustomer:Tuser} ) => {
             {/* profile card */}
            <div className="lg:w-2/5">
            <div className=" shadow-none pb-4 md:pb-4 lg:pb-2  ">
-            <Card className="">
+            <Card className=" py-3">
       
             <CardContent>
                 <div className="  flex justify-center ">
@@ -130,7 +130,7 @@ const CustomerProfile =  ({singlecustomer}:{singlecustomer:Tuser} ) => {
             <div className=" shadow-none  md:pb-4 lg:pb-0 ">
                 
             <Card className="">
-            <h1 className=" text-xl border-b-2 pb-2 text-left pl-6"> My Preferences</h1>
+            <h1 className=" text-xl border-b-2 pb-2 text-left pl-6 py-3"> My Preferences</h1>
             <CardContent>
                 <div className="" >
             

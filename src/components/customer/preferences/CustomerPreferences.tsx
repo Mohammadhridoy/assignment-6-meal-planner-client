@@ -91,7 +91,7 @@ const CustomerPreferences = () => {
 
     return (
         <div >
-            <Card className="max-w-2xl mx-auto mt-10 ">
+            <Card className="max-w-2xl mx-auto mt-10 py-6">
                 <CardHeader>
                     <CardTitle className="text-2xl">Dietary Preferences</CardTitle>
                 </CardHeader>

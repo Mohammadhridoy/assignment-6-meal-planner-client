@@ -10,8 +10,11 @@ import { addProduct } from "@/redux/features/cartSlice";
 const CardMeal = ({meal}:{meal:TMeal}) => {
     
     const dispatch = useAppDispatch()
-    const handleAdd = () =>{
+
+    const handleAdd = (meal:TMeal) =>{
+        
         dispatch(addProduct(meal))
+        
     }
 
     return (
@@ -53,7 +56,7 @@ const CardMeal = ({meal}:{meal:TMeal}) => {
              <CardFooter className="p-2">
              
              <Button  className="w-full text-white text-xl cursor-pointer"
-             onClick={() =>{ handleAdd()}}
+             onClick={ () => handleAdd(meal)}
              >Add Cart</Button>
                     
              </CardFooter>
