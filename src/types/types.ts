@@ -20,7 +20,8 @@ export type Tuser = {
         cuisinespecialties: string[] 
         availability: string[]
         price:string
-    }
+    },
+    rating?:string
 }
 
 
@@ -32,14 +33,24 @@ export type TMeal= {
     category: "Veg" | "Non-Veg"
     portionSize: "Small" | "Medium" | "Large"
     image: string
-    tags: string
+    tags: string[]
     ingredients:string
     preparationTime: string,
     _id?:string,
     available:boolean,
     isDeleted:boolean,
-   
     
 
+}
 
+export  interface IMenus {
+    menuname: string
+    providerId: Tuser
+    mealSlot: "Breakfast"| "Lunch" |"Dinner"
+    meals: TMeal[]
+    mealPublishDate: string,
+    specialNotes: string
+    isDeleted?:boolean,
+    _id:string
+    
 }

@@ -129,3 +129,24 @@ export const createMenus = async ( menuData:FieldValues) =>{
  
  }
 
+
+ export const getAllMenus = async () =>{
+    try{
+        const res  = await fetch(`${process.env.NEXT_PUBLIC_BASE_API}/provider/getallmenus`,
+            {
+                next:{
+                    tags:['PROVIDER']
+                }
+            },
+        
+            
+        )
+
+        const data = await res.json()
+       
+        return data
+
+       }catch(error: any){
+         return Error(error)
+       }
+} 
