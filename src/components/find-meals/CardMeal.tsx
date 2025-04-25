@@ -1,10 +1,19 @@
+"use client"
 import { TMeal } from "@/types/types";
 import { Card, CardContent, CardFooter } from "../ui/card";
 import { Badge } from "../ui/badge";
 import { Button } from "../ui/button";
+import { useAppDispatch } from "@/redux/hook";
+import { addProduct } from "@/redux/features/cartSlice";
 
 
 const CardMeal = ({meal}:{meal:TMeal}) => {
+    
+    const dispatch = useAppDispatch()
+    const handleAdd = () =>{
+        dispatch(addProduct(meal))
+    }
+
     return (
         <div >
             <Card className=" lg:w-10/12 lg:h-10/12 max-w-sm rounded-2xl overflow-hidden hovershadow-xl transition-shadow ">
@@ -43,7 +52,9 @@ const CardMeal = ({meal}:{meal:TMeal}) => {
              </CardContent>
              <CardFooter className="p-2">
              
-             <Button className="w-full text-white text-xl cursor-pointer">Add Cart</Button>
+             <Button  className="w-full text-white text-xl cursor-pointer"
+             onClick={() =>{ handleAdd()}}
+             >Add Cart</Button>
                     
              </CardFooter>
             </Card>

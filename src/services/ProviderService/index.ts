@@ -130,9 +130,31 @@ export const createMenus = async ( menuData:FieldValues) =>{
  }
 
 
- export const getAllMenus = async () =>{
+ export const getAllMenus = async (query?:{[key:string]:string | string[] | undefined}) =>{
+   
+    const params = new URLSearchParams()
+  
+    console.log(query);
+
+    if(query?.search){
+        params.append('search', query?.search.toString())
+    }
+    if(query?.cuisine){
+        params.append('cuisine', query?.cuisine.toString())
+    }
+    if(query?.portion){
+        params.append('portion', query?.portion.toString())
+    }
+    if(query?.mealSlot){
+        params.append('mealslot', query?.mealSlot.toString())
+    }
+    if(query?.dietary){
+        params.append('dietary', query?.dietary.toString())
+    }
+  
+   
     try{
-        const res  = await fetch(`${process.env.NEXT_PUBLIC_BASE_API}/provider/getallmenus`,
+        const res  = await fetch(`${process.env.NEXT_PUBLIC_BASE_API}/provider/getallmenus?${params}`,
             {
                 next:{
                     tags:['PROVIDER']
