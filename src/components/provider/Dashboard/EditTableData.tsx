@@ -18,6 +18,8 @@ import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { useState } from "react";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { X } from "lucide-react";
+import { updateMeals } from "@/services/ProviderService";
+import { toast } from "sonner";
 
 
 const EditTableData = ({item}:{item:TMeal}) => {
@@ -25,8 +27,7 @@ const EditTableData = ({item}:{item:TMeal}) => {
 const[ingredients, setIngredients] = useState<string[]>([])
     const[tags, setTags] = useState<string[]>([])
 
-   console.log("tag", tags);
-    console.log(item?.tags);
+ 
     
 
     const form = useForm({
@@ -66,17 +67,17 @@ const[ingredients, setIngredients] = useState<string[]>([])
 
 
         try{
-          // const res = await createMeal(filupAlldata )
+          const res = await updateMeals( filupAlldata, item?._id as string)
           
-          // console.log(res);
-          // if(res.status){
-          //   toast.success(res?.message)
-          //   reset()
-          //   setIngredients([])
-          //   setTags([])
-          // }else{ 
-          //   toast.error(res?.message)
-          // }
+          console.log(res);
+          if(res.status){
+            toast.success(res?.message)
+            reset()
+            setIngredients([])
+            setTags([])
+          }else{ 
+            toast.error(res?.message)
+          }
     
         }catch(error: any){
           console.error(error);
@@ -326,7 +327,7 @@ const[ingredients, setIngredients] = useState<string[]>([])
           <DialogFooter className="sm:justify-start">
             <DialogClose asChild>
               <Button type="submit" className="mt-3  text-white text-xl p-5 shadow-sm cursor-pointer"  variant="default">
-              {isSubmitting ? "Creating....": "Create"} 
+              {isSubmitting ? "Saving....": "Save"} 
               </Button>
             </DialogClose>
           </DialogFooter>

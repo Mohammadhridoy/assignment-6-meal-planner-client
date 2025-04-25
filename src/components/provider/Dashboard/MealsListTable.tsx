@@ -20,7 +20,7 @@ import EditTableData from "./EditTableData";
 
 
 const MealsListTable = ({data}:{data:TMeal}) => {
-
+console.log(data);
 
     return (
         <div>
@@ -45,9 +45,9 @@ const MealsListTable = ({data}:{data:TMeal}) => {
                                     {item?.mealname}
                                 </TableCell>
                                 <TableCell className=" flex justify-center items-center"><DollarSign /> <span className="text-xl"> {item?.price} </span></TableCell>
-                                <TableCell className="text-center">{item?.available? <h1 className="flex  text-center justify-center ">
+                                <TableCell className="text-center">{item?.available? <h1 className="flex text-center justify-center ">
                                      <CircleCheck className="text-green-600 w-10"/> Available</h1>: 
-                                <h1> <X className="text-red-800"/> Unavailable</h1>}</TableCell>
+                                <h1 className="flex text-center justify-center items-center" > <X className="text-red-800 "/> Unavailable</h1>}</TableCell>
         
                                 <TableCell className="flex justify-center  items-center   gap-3 lg:mt-6 ">
                                    

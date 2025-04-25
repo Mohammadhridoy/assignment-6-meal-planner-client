@@ -1,20 +1,45 @@
 import { Switch } from "@/components/ui/switch";
+import { updateMeals } from "@/services/ProviderService";
 import { useState } from "react";
+import { toast } from "sonner";
 
 
 const ToggleInTable = ({id}:{id:string | undefined}) => {
 
     const [toggle , setToggle] = useState(false)
-    console.log(toggle);
+   
 
-    const handletoggle = (id:string) =>{
+    const handletoggle = async (id:string) =>{
         if(!toggle){
             setToggle(true)
         }else{
             setToggle(false)
         }
         
-        console.log(id);
+        const available:any = { }
+        
+        if(!toggle){
+        available["available"] = false
+
+        }else{
+            available["available"] = true
+        }
+
+      
+
+       try{
+        const res = await updateMeals(available, id)
+        console.log(res);
+          if(res.status){
+            toast.success(res?.message)
+          }else{ 
+            toast.error(res?.message)
+          }
+
+       }catch(error:any){
+        console.error(error)
+       }
+    
     }
 
 

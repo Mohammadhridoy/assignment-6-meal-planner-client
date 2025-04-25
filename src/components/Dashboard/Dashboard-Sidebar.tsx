@@ -88,7 +88,7 @@ import { useState } from "react"
           },
           {
             title: "Post Meal Manu",
-            url: "/provider/post-meal-menu",
+            url: "/provider/menus",
             icon: SquarePen,
             isActive: true,
           },

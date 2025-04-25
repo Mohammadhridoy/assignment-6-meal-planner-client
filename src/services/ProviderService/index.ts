@@ -79,3 +79,24 @@ export const createMeal = async ( mealData:FieldValues) =>{
        }
 } 
 
+
+export const updateMeals = async (data:FieldValues, mealId: string) =>{
+    try{
+        const res  = await fetch(`${process.env.NEXT_PUBLIC_BASE_API}/provider/meal/update/${mealId}`,
+            {
+                method:"PATCH",
+                headers:{
+                    "Content-Type": "application/json",
+                    Authorization: (await cookies()).get("accessToken")!.value
+                },
+                body: JSON.stringify(data)
+            },
+        
+            
+        )
+        revalidateTag('PROVIDER')
+        return res.json()
+       }catch(error: any){
+         return Error(error)
+       }
+}  
