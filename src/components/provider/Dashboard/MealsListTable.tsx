@@ -20,7 +20,7 @@ import EditTableData from "./EditTableData";
 
 
 const MealsListTable = ({data}:{data:TMeal}) => {
-console.log(data);
+
 
     return (
         <div>

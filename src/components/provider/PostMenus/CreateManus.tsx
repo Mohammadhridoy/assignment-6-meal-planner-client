@@ -1,7 +1,7 @@
 "use client"
+
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Controller, FieldValues, useForm,} from "react-hook-form";
 import { toast } from "sonner";
 import { format } from "date-fns"
@@ -14,20 +14,87 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover"
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { Label } from "@radix-ui/react-dropdown-menu";
+import Select from 'react-select';
+import { TMeal } from "@/types/types";
+import { useUser } from "@/context/UserContext";
+import { createMenus } from "@/services/ProviderService";
 
 
+type Titem = {
+    label:string,
+    value:string
+}
 
-const CreateManus = () => {
+const CreateManus = ({data}:{data:TMeal[]}) => {
+
+    const [option, setOption] = useState<{label:string, value:string | undefined}[]>([])
+    const mealSlot = [
+        {label:"Lunch", value:"Lunch"},
+        {label:"Dinner", value:"Dinner"},
+        {label:"Breakfast", value:"Breakfast"}
+
+    ]
+
+    useEffect(( )=>{
+        if(data){
+            const  mealOptions = data?.map((item) => ({
+                label:item.mealname,
+                value : item._id,
+            }  ))
+            setOption(mealOptions)
+        }
+    }, [data])
+
+    const{ user} = useUser()
+  
+
     const [date, setDate] = React.useState<Date>()
-    console.log(date?.toUTCString);
+   
 
     const  form  = useForm()
 
-const {control,  handleSubmit } = form 
-    const onSubmit = (data:FieldValues) =>{
-        // toast.success("Meal Menu submitted successfuly")
-        console.log(data);
+const {control,  handleSubmit, reset} = form 
+    const onSubmit = async (data:FieldValues) =>{
+      
+
+        const filterData = {
+            menuname : data?.menuname?.trim(),
+            mealSlot: data?.mealSlot.value?.trim(),
+            meals: data?.meals.map((item:Titem) => item.value?.trim() ),
+            mealPublishDate: date?.toISOString(),
+            specialNotes: data?.specialNotes?.trim(),
+            providerId: user?.id 
+        }
+
+        console.log("fill", filterData);
+
+        if(!filterData?.menuname || filterData?.meals.length === 0 || !filterData?.providerId){
+                toast.error("Please complete all required fields")
+        }
+          try{
+                  const res = await createMenus(filterData)
+                  
+                  console.log(res);
+                  if(res.status){
+                    toast.success(res?.message)
+                    reset({
+                        menuname : " ",
+                        mealSlot: null,
+                        meals: [],
+                        mealPublishDate: null, 
+                        specialNotes: " ",
+                    })
+                    
+                    
+                  }else{ 
+                    toast.error(res?.message)
+                  }
+            
+                }catch(error: any){
+                  console.error(error);
+                }
 
 
     }
@@ -43,9 +110,9 @@ const {control,  handleSubmit } = form
                     <Controller 
                     
                     control={control}
-                    name ="menuName"
+                    name ="menuname"
                     render={({field})=>(
-                        <Input {...field}  value={field.value ?? " "} placeholder="Enter Manu name"/>
+                        <Input {...field}   placeholder=" Enter Manu name" value={field.value ?? " "}/>
 
                     )}
                     />
@@ -83,22 +150,40 @@ const {control,  handleSubmit } = form
                     <label className="block mb-1">Meal Slot</label>
                     <Controller 
                     control={control}
-                    name="dataAvailability"
+                    name="mealSlot"
                     render={({field})=>(
-                        <Select onValueChange={field.onChange} value={field.value ?? ' '}>
-                            <SelectTrigger className="w-full">
-                            <SelectValue placeholder="Select meal slot"/>
-                            </SelectTrigger>
-                            <SelectContent>
-                                <SelectItem value="Lunch">Lunch</SelectItem>
-                                <SelectItem value="Dinner">Dinner</SelectItem>
-                            </SelectContent>
-                        </Select>
-
-                    )} />
+                        // 
+                        <Select 
+                        {...field}
+                        instanceId="mealSlot-3"
+                        options={ mealSlot}
+                        placeholder="Select Meal Slot"
+                        isClearable
+                        />
+                    )} 
+                    />
 
 
                 </div>
+                    {/* map meals  */}
+                <div>
+                        <Label className="mb-2 block">Meals</Label>
+                        <Controller
+                        name="meals"
+                        control={control}
+                        render={({ field }) => (
+                            <Select
+                            {...field}
+                            instanceId ="meals-select"
+                            isMulti
+                            options={ option}
+                            className="react-select-container"
+                            classNamePrefix="react-select"
+                            />
+                        )}
+                        />
+                    </div>
+
 
                 {/* note */}
                 <div className="mb-4">

@@ -100,3 +100,32 @@ export const updateMeals = async (data:FieldValues, mealId: string) =>{
          return Error(error)
        }
 }  
+
+
+export const createMenus = async ( menuData:FieldValues) =>{
+    
+    try{
+     const res  = await fetch(`${process.env.NEXT_PUBLIC_BASE_API}/provider/createmenus`,
+         {
+             method:"POST",
+             headers:{
+                "Content-Type": "application/json",
+                Authorization: (await cookies()).get("accessToken")!.value
+             },
+             body: JSON.stringify(menuData)
+         },
+     
+         
+     )
+
+     if(!res.ok){
+        throw new Error(`${res.status}`)
+     }
+     revalidateTag('PROVIDER')
+     return res.json()
+    }catch(error: any){
+      return Error(error)
+    }
+ 
+ }
+

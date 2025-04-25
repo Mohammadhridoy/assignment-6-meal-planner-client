@@ -1,10 +1,16 @@
 import CreateManus from "@/components/provider/PostMenus/CreateManus";
+import { getAllMeals } from "@/services/ProviderService";
 
 
-const postMealManu = () => {
+const postMealManu = async() => {
+
+
+    const {data } = await getAllMeals()
+ 
+
     return (
         <div className="flex justify-center items-center align-middle">
-            <CreateManus/>
+            <CreateManus data={data}/>
         </div>
     );
 };

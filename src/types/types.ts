@@ -9,6 +9,7 @@ export type Tuser = {
     role:  "customer"| "provider",
     address?: string
     _id?:string,
+    id?:string
     preferences: {
         dietaryRestrictions:string[],
         preferredCuisines: string[],
@@ -36,7 +37,8 @@ export type TMeal= {
     preparationTime: string,
     _id?:string,
     available:boolean,
-    isDeleted:boolean
+    isDeleted:boolean,
+   
     
 
 
